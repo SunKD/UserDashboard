@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Ideas";
+}
+
+<div class="row">
+    <div class="col-md-12"><h1>Hi @ViewBag.CurrentUser.Name!</h1></div>  
+</div>
+<div class="row">
+    <form asp-area="" asp-controller="Wall" asp-action="PostIdea" method="POST">
+        <div class="col-md-10"><input type="text" class="form-control" placeholder="Post something witty here" name="idea" required></div>
+        <div class="col-md-1"><input type="submit" value="Idea!"></div>
+    </form>
+</div>
+<div>
+    <span class="error">@ViewBag.Error</span>
+</div>
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    @{
+        @foreach(var item in @ViewBag.AllIdea){
+            <div class="row"></div>
+            <div class="col-md-1">
+                <a href="users/@item.User.UserID">@item.User.Name</a> says:
+            </div>
+            <div class="col-md-8">
+                <div class="box"><p>@item.UserIdea</p></div>
+            </div>
+            @if(item.UserID == @ViewBag.CurrentUserID){
+                <a href="delete/@item.IdeaID"><i class="fa fa-times-circle-o" aria-hidden="true">Delete</i></a>
+            <i class="fas fa-times"></i>
+        }
+        <a href="like/@item.IdeaID/@ViewBag.CurrentUserID">Like</a>
+            <p><a href="idea/@item.IdeaID" >@item.liked people</a> like this.</p>
+    }
+}
+
+</div>

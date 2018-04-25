@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "User Posts";
+}
+
+@{
+    <a href="users/@ViewBag.Idea.User.UserID">@ViewBag.Idea.User.Name</a>says:    
+    <p>@ViewBag.Idea.UserIdea</p>
+
+    <p>People who liked this post:</p>
+    <table class="table text-center">
+    <thead>
+    <tr>
+    <th class="text-center">Alias</th>
+    <th class="text-center">Name</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in ViewBag.allLiked){
+            <tr>
+            <td>@item.User.NickName</td>
+            <td>@item.User.Name</td>
+            </tr>
+        }
+        <tr></tr>
+    </tbody>
+    </table>
+}
+
